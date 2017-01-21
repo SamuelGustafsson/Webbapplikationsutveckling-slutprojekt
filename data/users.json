@@ -1,0 +1,119 @@
+[
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 39,
+    "name": {
+      "first": "Osborn",
+      "last": "Boyer"
+    },
+    "email": "osborn.boyer@undefined.io",
+    "phone": "+46 (953) 535-2730",
+    "address": "541 Bradford Street, Nescatunga, Missouri, 861",
+    "latitude": "63.253501",
+    "longitude": "20.13338"
+  },
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 33,
+    "name": {
+      "first": "Hodges",
+      "last": "Kramer"
+    },
+    "email": "hodges.kramer@undefined.me",
+    "phone": "+46 (997) 513-2899",
+    "address": "273 Montrose Avenue, Crumpler, Kansas, 3023",
+    "latitude": "63.538156",
+    "longitude": "41.222706"
+  },
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 20,
+    "name": {
+      "first": "Trina",
+      "last": "Marks"
+    },
+    "email": "trina.marks@undefined.com",
+    "phone": "+46 (873) 516-2330",
+    "address": "825 Rutland Road, Bellfountain, Alaska, 6222",
+    "latitude": "-39.15545",
+    "longitude": "-6.930792"
+  },
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 34,
+    "name": {
+      "first": "Potts",
+      "last": "Eaton"
+    },
+    "email": "potts.eaton@undefined.info",
+    "phone": "+46 (869) 438-3121",
+    "address": "638 Eldert Lane, Albany, Maine, 3741",
+    "latitude": "-51.136576",
+    "longitude": "-114.750673"
+  },
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 39,
+    "name": {
+      "first": "Malinda",
+      "last": "Snyder"
+    },
+    "email": "malinda.snyder@undefined.tv",
+    "phone": "+46 (819) 575-3440",
+    "address": "151 Hutchinson Court, Bayview, Puerto Rico, 9834",
+    "latitude": "-4.836917",
+    "longitude": "-4.860273"
+  },
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 38,
+    "name": {
+      "first": "Garner",
+      "last": "Cantrell"
+    },
+    "email": "garner.cantrell@undefined.org",
+    "phone": "+46 (806) 532-3473",
+    "address": "110 Quentin Road, Moraida, Alabama, 7202",
+    "latitude": "23.005675",
+    "longitude": "-133.698786"
+  },
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 22,
+    "name": {
+      "first": "Lucas",
+      "last": "Mercer"
+    },
+    "email": "lucas.mercer@undefined.biz",
+    "phone": "+46 (952) 477-2316",
+    "address": "456 Macdougal Street, Tedrow, Ohio, 1190",
+    "latitude": "-21.228865",
+    "longitude": "-99.959336"
+  },
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 31,
+    "name": {
+      "first": "Ferrell",
+      "last": "Sloan"
+    },
+    "email": "ferrell.sloan@undefined.biz",
+    "phone": "+46 (938) 482-2132",
+    "address": "582 Liberty Avenue, Bancroft, New Mexico, 6987",
+    "latitude": "-38.393532",
+    "longitude": "-174.476941"
+  },
+  {
+    "picture": "http://placehold.it/32x32",
+    "age": 26,
+    "name": {
+      "first": "Mccarthy",
+      "last": "Sutton"
+    },
+    "email": "mccarthy.sutton@undefined.us",
+    "phone": "+46 (986) 545-2689",
+    "address": "996 Dobbin Street, Goochland, Minnesota, 6909",
+    "latitude": "87.149172",
+    "longitude": "98.136209"
+  }
+]

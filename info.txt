@@ -1,0 +1,6 @@
+The movie database API KEY: d3694056d3f695b5cee87388c26b9e69
+
+Searches 
+
+Series: 
+https://api.themoviedb.org/3/search/tv?page=1&query=vikings&language=en-US&api_key=d3694056d3f695b5cee87388c26b9e69

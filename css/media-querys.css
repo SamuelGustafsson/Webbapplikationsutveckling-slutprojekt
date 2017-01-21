@@ -1,0 +1,115 @@
+/* 
+Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap 
+*/
+
+@media (max-width: 575px) {
+
+   .carousel-inner {
+      height: auto;
+   }
+
+   #media-overview-item h2,
+   #media-overview-item h3 {
+      text-align: center;
+      width: 100%;
+   }
+
+   .media-information-container h3,
+   .media-information-containe p {
+    text-align: center;
+   }
+
+   .media-title {
+   margin-bottom: 20px
+   }
+
+   #media-overview-item .media-rating {
+      display: none;
+   }
+
+   #media-overview-item .person-information {
+      margin-top: 20px;
+      margin-bottom: 20px;
+   }
+
+   #media-overview-item .media-title h2 {
+      margin: 0;
+   }
+
+   #media-overview-item .overview {
+      margin-top: 20px;
+   }
+
+   #media-overview-item .media-actor p {
+      text-align: center;
+   }
+
+   .person-information p {
+      margin-bottom: 15px;
+      text-align: center;
+   }
+
+   .person-information h3 {
+      font-size: 1.7rem;
+   }
+
+   #known-for-container {
+      text-align: center;
+   }
+
+   #known-for-item div {
+      margin-bottom: 20px;
+   }
+
+   #person-details-container {
+   margin-top: 30px;
+}
+
+
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+   #person-details-container h3 {
+    text-align: center;
+   }
+
+   #known-for-container {
+      text-align: center;
+   }
+
+   #known-for-item div {
+      margin-bottom: 20px;
+   }
+
+.person-information p {
+    margin-bottom: 15px;
+}
+
+#person-details-container {
+   margin-top: 30px;
+}
+
+   .person-information h3 {
+      font-size: 1.7rem;
+      text-align: center;
+   }
+
+   .person-information p {
+}
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+   .media-title {
+      margin-top: 30px;
+   }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

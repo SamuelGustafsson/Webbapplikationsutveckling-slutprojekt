@@ -3,8 +3,8 @@
 $(document).ready(function () {
       var apiKey = "d3694056d3f695b5cee87388c26b9e69";
 
-      createOverviewItem("https://image.tmdb.org/t/p/w300//xkptUwXpjvEXEpiPbmneEeNWT3x.jpg", "Batman", "2017", "6.9", "The Dynamic Duo faces four super-villains who plan to hold the world for ransom with the help of a secret invention that instantly dehydrates people.");
-      getMovieCrew(18734)
+      // createOverviewItem("https://image.tmdb.org/t/p/w300//xkptUwXpjvEXEpiPbmneEeNWT3x.jpg", "Batman", "2017", "6.9", "The Dynamic Duo faces four super-villains who plan to hold the world for ransom with the help of a secret invention that instantly dehydrates people.");
+      // getMovieCrew(18734)
 
       getPopularMovies(apiKey);
 

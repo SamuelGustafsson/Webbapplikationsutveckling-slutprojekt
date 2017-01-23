@@ -245,10 +245,10 @@ function renderPersonProfile(name, biography, birthday, gender, homepage, placeO
             '<div class="overview"><h3>Biography</h3><div class="biography">' +
             '<p>' + biography + '</p></div></div></div>' +
             '<section id="person-details-container" class=" col-sm-12 "><h3>Personal information</h3><section class="person-information row">' +
-            '<p class="offset-sm-3 col-sm-4 offset-md-0 col-md-3"><strong>Gender<br></strong>' + genderType + '</p>' +
-            '<p class="col-sm-3 col-md-3"><strong>BirthDay<br></strong>' + birthday + '</p>' +
-            '<p class="offset-sm-3 col-sm-4 offset-md-0 col-md-3"><strong>Place of Birth<br></strong>' + placeOfBirth + '</p>' +
-            '<p class="col-sm-4 col-md-3"><strong>Official Site<br></strong>' + homepage + '</p>' +
+            '<p class="offset-sm-3 col-sm-4 offset-md-2 col-md-2"><strong>Gender<br></strong>' + genderType + '</p>' +
+            '<p class="col-sm-3 col-md-2"><strong>BirthDay<br></strong>' + birthday + '</p>' +
+            '<p class="offset-sm-2 col-sm-4 offset-md-0 col-md-2"><strong>Place of Birth<br></strong>' + placeOfBirth + '</p>' +
+            '<p class="col-sm-4 col-md-2"><strong>Official Site<br></strong>' + homepage + '</p>' +
             '</section><h3>Known for</h3>' +
             '<div id="known-for-container" class="row" ></div></section></div>';
 

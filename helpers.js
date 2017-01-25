@@ -11,8 +11,14 @@ function searchMovieOrSerieByQuery(type, title, apiKey) {
             "async": true,
             "crossDomain": true,
             "url": "https://api.themoviedb.org/3/search/" + type + "?include_adult=false&page=1&query=" + title + "&language=en-US&api_key=" + apiKey,
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "beforeSend": function () {
+                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                  $("#movie-section").addClass("ajax-load-fix");
+            },
+            "success": function () {
+                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                  $("#movie-section").removeClass("ajax-load-fix");
+            },
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -22,10 +28,11 @@ function searchMovieOrSerieByQuery(type, title, apiKey) {
 
             console.info(response.results[0]);
             if (response.results == 0) {
-                  $.alert({
-                        title: 'Alert!',
-                        content: 'Sorry we couldent find that ' + type,
-                  });
+                  $.alert(
+                        {
+                              title: 'Alert!',
+                              content: 'Sorry we couldent find that ' + type,
+                        });
             }
 
             for (var i = 0; i < response.results.length; i++) {
@@ -33,6 +40,8 @@ function searchMovieOrSerieByQuery(type, title, apiKey) {
                   getMediaByID(response.results[i].id, type, apiKey);
 
             }
+            alert("tjenna");
+            $(".jconfirm-box-container").addClass("offset-md-4");
       });
 }
 
@@ -41,8 +50,14 @@ function getMediaByID(itemID, type, apiKey) {
             "async": true,
             "crossDomain": true,
             "url": 'https://api.themoviedb.org/3/' + type + '/' + itemID + '?api_key=' + apiKey + '&language=en-US',
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "beforeSend": function () {
+                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                  $("#movie-section").addClass("ajax-load-fix");
+            },
+            "success": function () {
+                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                  $("#movie-section").removeClass("ajax-load-fix");
+            },
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -163,8 +178,14 @@ function getMovieCrew(movieID) {
             "async": true,
             "crossDomain": true,
             "url": 'https://api.themoviedb.org/3/movie/' + movieID + '/credits?api_key=d3694056d3f695b5cee87388c26b9e69',
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "beforeSend": function () {
+                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                  $("#movie-section").addClass("ajax-load-fix");
+            },
+            "success": function () {
+                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                  $("#movie-section").removeClass("ajax-load-fix");
+            },
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -185,8 +206,14 @@ function renderOverviewItem(mediaID, type, apiKey) {
             "async": true,
             "crossDomain": true,
             "url": 'https://api.themoviedb.org/3/' + type + '/' + mediaID + '?api_key=' + apiKey + '&language=en-US',
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "beforeSend": function () {
+                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                  $("#movie-section").addClass("ajax-load-fix");
+            },
+            "success": function () {
+                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                  $("#movie-section").removeClass("ajax-load-fix");
+            },
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -239,8 +266,14 @@ function renderPersonProfile(personID, apiKey) {
             "async": true,
             "crossDomain": true,
             "url": 'https://api.themoviedb.org/3/person/' + personID + '?language=en-US&api_key=' + apiKey,
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "beforeSend": function () {
+                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                  $("#movie-section").addClass("ajax-load-fix");
+            },
+            "success": function () {
+                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                  $("#movie-section").removeClass("ajax-load-fix");
+            },
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -276,8 +309,14 @@ function renderPersonProfileMoviesAndTVShows(personID, apiKey) {
             "async": true,
             "crossDomain": true,
             "url": 'https://api.themoviedb.org/3/person/' + personID + '/combined_credits?language=en-US&api_key=' + apiKey,
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "beforeSend": function () {
+                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                  $("#movie-section").addClass("ajax-load-fix");
+            },
+            "success": function () {
+                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                  $("#movie-section").removeClass("ajax-load-fix");
+            },
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -307,8 +346,14 @@ function getPopularMovies(apiKey) {
             "async": true,
             "crossDomain": true,
             "url": "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=" + apiKey,
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "beforeSend": function () {
+                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                  $("#movie-section").addClass("ajax-load-fix");
+            },
+            "success": function () {
+                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                  $("#movie-section").removeClass("ajax-load-fix");
+            },
             "method": "GET",
             "headers": {},
             "data": "{}"

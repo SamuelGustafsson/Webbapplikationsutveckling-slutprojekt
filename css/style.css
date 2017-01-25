@@ -274,6 +274,8 @@ height: 100%
 
 /* jQuery confirm */
 
+
+
 /* Ajax loader icon */
 
 .ajax-loader {
@@ -285,5 +287,11 @@ height: 100%
   background: rgba(255, 255, 255, .8)
                     url('../images/ajax-loader.gif')
                     no-repeat 50%;
-  
+}
+
+.ajax-load-fix {
+  height: 600px;
+}
+.ajax-load-fix {
+  height: 600px;
 }

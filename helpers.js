@@ -11,8 +11,8 @@ function searchMovieOrSerieByQuery(type, title, apiKey) {
             "async": true,
             "crossDomain": true,
             "url": "https://api.themoviedb.org/3/search/" + type + "?include_adult=false&page=1&query=" + title + "&language=en-US&api_key=" + apiKey,
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
+            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
+            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -30,19 +30,19 @@ function searchMovieOrSerieByQuery(type, title, apiKey) {
 
             for (var i = 0; i < response.results.length; i++) {
 
-                  getMovieByID(response.results[i].id, type, apiKey);
+                  getMediaByID(response.results[i].id, type, apiKey);
 
             }
       });
 }
 
-function getMovieByID(itemID, type, apiKey) {
+function getMediaByID(itemID, type, apiKey) {
       var settings = {
             "async": true,
             "crossDomain": true,
             "url": 'https://api.themoviedb.org/3/' + type + '/' + itemID + '?api_key=' + apiKey + '&language=en-US',
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
+            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
+            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
             "method": "GET",
             "headers": {},
             "data": "{}"
@@ -51,10 +51,11 @@ function getMovieByID(itemID, type, apiKey) {
       $.ajax(settings).done(function (response) {
             var mediaObj = {};
 
+            // Skapar ett object med media informationen
             mediaObj = {
                   id: response.id,
                   type: type,
-                  image: infoCheck(getImageURL(response.poster_path, "w300")),
+                  image: infoCheck(createImageUrl(response.poster_path, "w300")),
                   rating: infoCheck(response.vote_average),
                   genres: infoCheck(jQuery.trim(getGenresFromMediaID(response.genres)).substring(0, 25).split(" ").slice(0, -1).join(" ") + "..."),
                   overview: infoCheck(jQuery.trim(response.overview).substring(0, 100)
@@ -62,35 +63,10 @@ function getMovieByID(itemID, type, apiKey) {
             }
 
             if (type === "movie") {
-                  // mediaObj = {
-                  // id: response.id,
-                  // type: type,
-                  // image: getImageURL(response.poster_path, "w300"),
-                  // title: response.title,
-                  // rating: response.vote_average,
-                  // genres: jQuery.trim(getGenresFromMediaID(response.genres)).substring(0, 25)
-                  //       .split(" ").slice(0, -1).join(" ") + "...",
-                  // release_date: response.release_date,
-                  // overview: jQuery.trim(response.overview).substring(0, 100)
-                  // .split(" ").slice(0, -1).join(" ") + "..."
-
-                  mediaObj.title = infoCheck(response.title);
+                  mediaObj.title = infoCheck(jQuery.trim(response.title).substring(0, 20) + "...");
                   mediaObj.release_date = infoCheck(jQuery.trim(response.release_date).substring(0, 4));
-                  // };
             }
             else if (type === "tv") {
-                  // mediaObj = {
-                  // id: response.id,
-                  // type: type,
-                  // image: getImageURL(response.poster_path, "w300"),
-                  // title: response.name,
-                  // rating: response.vote_average,
-                  // genres: jQuery.trim(getGenresFromMediaID(response.genres)).substring(0, 25)
-                  //       .split(" ").slice(0, -1).join(" ") + "...",
-                  // release_date: jQuery.trim(response.first_air_date).substring(0, 4),
-                  // overview: jQuery.trim(response.overview).substring(0, 100)
-                  //       .split(" ").slice(0, -1).join(" ") + "..."
-                  // };
                   mediaObj.title = response.name;
                   mediaObj.release_date = jQuery.trim(response.first_air_date).substring(0, 4);
             }
@@ -99,22 +75,7 @@ function getMovieByID(itemID, type, apiKey) {
                   mediaObj.image = "http://www.51allout.co.uk/wp-content/uploads/2012/02/Image-not-found.gif";
             }
 
-            // var moviePoster = getImageURL(response.poster_path, "w300");
-            // if (!response.backdrop_path) {
-            //       moviePoster = "http://www.51allout.co.uk/wp-content/uploads/2012/02/Image-not-found.gif";
-            // }
-
-            // var movieTitle = response.title;
-            // var movieRating = response.vote_average;
-            // var movieGenres = jQuery.trim(getGenresFromMediaID(response.genres)).substring(0, 25)
-            //       .split(" ").slice(0, -1).join(" ") + "...";
-
-            // var movieReleaseDate = response.release_date;
-            // var movieOverview = jQuery.trim(response.overview).substring(0, 100)
-            //       .split(" ").slice(0, -1).join(" ") + "...";
-
-
-            // Adderar rows beoende på vilken användare har skärupplösning
+            // Adderar rows beoende på vilken användare har skärmupplösning
             var windowWidth = $(window).width();
 
             if (windowWidth > 1199) {
@@ -146,9 +107,224 @@ function getMovieByID(itemID, type, apiKey) {
                         $(".movie-result").append('<div class="row movieItems-row"></div>')
                   }
             }
-
+            // Skickar media objektet till en funktion som bygger ett html element med den och renderar det till DOM
             $(".movieItems-row").last().append(createMediaItem(mediaObj));
-            // $(".movieItems-row").last().append(createMediaItem(moviePoster, movieTitle, movieRating, movieGenres, movieReleaseDate, movieOverview, movieID, type));
+      });
+}
+
+function getGenresFromMediaID(array) {
+      var genresString = "";
+      for (var i = 0; i < array.length; i++) {
+
+            if (i == array.length - 1) {
+                  genresString += array[i].name + " ";
+            }
+            else {
+                  genresString += array[i].name + ", ";
+            }
+      }
+
+      return genresString
+
+}
+
+// function getMoviesOnCinema() {
+//       settings = {
+//             "async": true,
+//             "crossDomain": true,
+//             "url": " https://api.themoviedb.org/3/movie/now_playing?api_key=d3694056d3f695b5cee87388c26b9e69&language=en-US&page=1&region=SE",
+//             "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
+//             "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
+//             "method": "GET",
+//             "headers": {},
+//             "data": "{}"
+//       }
+//       $.ajax(settings).done(function (response) {
+//             getPosters(response)
+//       });
+
+// }
+
+// function getPosters(movieObject) {
+//       var posterArr = [];
+
+//       for (var i = 0; i < movieObject.results.length; i++) {
+
+//             if (movieObject.results[i].poster_path) {
+//                   posterArr.push(createImageUrl(movieObject.results[i].poster_path, "original"));
+//             }
+//       }
+//       return posterArr;
+// }
+
+function getMovieCrew(movieID) {
+
+      var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": 'https://api.themoviedb.org/3/movie/' + movieID + '/credits?api_key=d3694056d3f695b5cee87388c26b9e69',
+            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
+            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "method": "GET",
+            "headers": {},
+            "data": "{}"
+      }
+
+      $.ajax(settings).done(function (response) {
+
+            for (actor in response.cast) {
+                  renderCredits(response.cast[actor].name, response.cast[actor].character, response.cast[actor].id);
+            }
+      });
+}
+
+function renderOverviewItem(mediaID, type, apiKey) {
+
+
+      var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": 'https://api.themoviedb.org/3/' + type + '/' + mediaID + '?api_key=' + apiKey + '&language=en-US',
+            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
+            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "method": "GET",
+            "headers": {},
+            "data": "{}"
+      }
+
+      $.ajax(settings).done(function (response) {
+
+            console.info(response);
+
+            var mediaItem = {};
+
+            var mediaItem = {
+                  id: response.id,
+                  image: infoCheck(createImageUrl(response.poster_path, "w300")),
+                  rating: infoCheck(response.vote_average),
+                  overview: infoCheck(response.overview)
+            }
+
+            if (type === "movie") {
+                  mediaItem.title = response.title;
+                  mediaItem.release_date = response.release_date;
+            }
+            else if (type === "tv") {
+                  mediaItem.title = response.name;
+                  mediaItem.release_date = response.first_air_date;
+            }
+
+            console.info(mediaItem);
+            // Hämta och rendera den valda filmen.
+            createOverviewItem(mediaItem);
+
+            // Hämta och rendera medverkande till filmen.
+            getMovieCrew(mediaItem.id);
+      });
+}
+
+function renderCredits(fullname, character, personID) {
+      var htmlString = "";
+
+      htmlString += '<div class="media-actor col-sm-4"><p><a href="" data-personID="' + personID + '">' + fullname + '</a></p><p class="media-people-title">' + character + '</p></div>';
+
+      $(".media-actors").append(htmlString);
+};
+
+function renderPersonProfile(personID, apiKey) {
+
+      $(".movie-result").html("");
+
+      var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": 'https://api.themoviedb.org/3/person/' + personID + '?language=en-US&api_key=' + apiKey,
+            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
+            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "method": "GET",
+            "headers": {},
+            "data": "{}"
+      }
+
+      $.ajax(settings).done(function (response) {
+
+            personObj = {
+                  id: infoCheck(response.id),
+                  name: infoCheck(response.name),
+                  biography: infoCheck(response.biography),
+                  birthday: infoCheck(response.birthday),
+                  gender: response.gender,
+                  homepage: infoCheck(response.homepage),
+                  place_of_birth: infoCheck(response.place_of_birth),
+                  image: createImageUrl(response.profile_path, "w300"),
+
+            }
+
+            if (response.gender == 2) { personObj.gender = "Male"; }
+            else if (response.gender == 0) { personObj.gender = "Female"; }
+            else { personObj.gender = "Not found" }
+
+            createPersonProfile(personObj, apiKey);
+      });
+}
+
+function renderPersonProfileMoviesAndTVShows(personID, apiKey) {
+
+      var htmlString = "";
+
+      var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": 'https://api.themoviedb.org/3/person/' + personID + '/combined_credits?language=en-US&api_key=' + apiKey,
+            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
+            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "method": "GET",
+            "headers": {},
+            "data": "{}"
+      }
+
+      $.ajax(settings).done(function (response) {
+
+            var title = ""
+
+            for (var i = 0; i < response.cast.length; i++) {
+
+                  if (response.cast[i].media_type === "tv") {
+                        title = response.cast[i].name
+                  }
+                  else if (response.cast[i].media_type === "movie") {
+                        title = response.cast[i].title
+                  }
+
+                  htmlString += '<div class="known-for-item col-xs-12 col-sm-4 col-md-3"><div class="image"><img src="' + createImageUrl(response.cast[i].poster_path, "w300") + '" alt=""></div><a href="" data-movieID="' + response.cast[i].id + '" data-mediaType="' + response.cast[i].media_type + '">' + title + '</a></div>';
+            }
+            $("#known-for-container").append(htmlString);
+      });
+}
+
+function getPopularMovies(apiKey) {
+      var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=" + apiKey,
+            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader); },
+            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove(); },
+            "method": "GET",
+            "headers": {},
+            "data": "{}"
+      }
+
+      $.ajax(settings).done(function (response) {
+            var htmlString = "";
+            var moviePosters = response.results.map(e => e.poster_path);
+
+            // Set first slider startpage slider item
+            $(".carousel-item img").first().attr("src", createImageUrl(moviePosters[0], "w780"));
+
+            for (var i = 1; i < moviePosters.length; i++) {
+                  htmlString = '<div class="carousel-item"><img class="d-block img-fluid" src="' + createImageUrl(moviePosters[i], "w780") + '" alt="First slide"></div>'
+                  $(".carousel-inner").append(htmlString);
+            }
       });
 }
 
@@ -201,182 +377,6 @@ function createOverviewItem(mediaObj) {
 
 }
 
-function getImageURL(imagePath, imageSize) {
-      /*
-      IMAGE SIZE ALTERNATIVES
-            "w300",
-            "w780",
-            "w1280",
-            "original"
-      
-      */
-      var imageURL = "";
-
-      imageURL = 'https://image.tmdb.org/t/p/' + imageSize + '/' + imagePath;
-
-      if (imagePath == null) {
-            imageURL = "http://www.51allout.co.uk/wp-content/uploads/2012/02/Image-not-found.gif";
-      }
-
-      return imageURL;
-}
-
-function getGenresFromMediaID(array) {
-      var genresString = "";
-      for (var i = 0; i < array.length; i++) {
-
-            if (i == array.length - 1) {
-                  genresString += array[i].name + " ";
-            }
-            else {
-                  genresString += array[i].name + ", ";
-            }
-      }
-
-      return genresString
-
-}
-
-// function getMoviesOnCinema() {
-//       settings = {
-//             "async": true,
-//             "crossDomain": true,
-//             "url": " https://api.themoviedb.org/3/movie/now_playing?api_key=d3694056d3f695b5cee87388c26b9e69&language=en-US&page=1&region=SE",
-//             "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-//             "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
-//             "method": "GET",
-//             "headers": {},
-//             "data": "{}"
-//       }
-//       $.ajax(settings).done(function (response) {
-//             getPosters(response)
-//       });
-
-// }
-
-function getPosters(movieObject) {
-      var posterArr = [];
-
-      for (var i = 0; i < movieObject.results.length; i++) {
-
-            if (movieObject.results[i].poster_path) {
-                  posterArr.push(getImageURL(movieObject.results[i].poster_path, "original"));
-            }
-      }
-      return posterArr;
-}
-
-function getMovieCrew(movieID) {
-
-      var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": 'https://api.themoviedb.org/3/movie/' + movieID + '/credits?api_key=d3694056d3f695b5cee87388c26b9e69',
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
-      }
-
-      $.ajax(settings).done(function (response) {
-
-            for (actor in response.cast) {
-                  renderCredits(response.cast[actor].name, response.cast[actor].character, response.cast[actor].id);
-            }
-      });
-}
-
-function renderOverviewItem(mediaID, type, apiKey) {
-
-
-      var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": 'https://api.themoviedb.org/3/' + type + '/' + mediaID + '?api_key=' + apiKey + '&language=en-US',
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
-      }
-
-      $.ajax(settings).done(function (response) {
-
-            console.info(response);
-
-            var mediaItem = {};
-
-            var mediaItem = {
-                  id: response.id,
-                  image: infoCheck(getImageURL(response.poster_path, "w300")),
-                  rating: infoCheck(response.vote_average),
-                  overview: infoCheck(response.overview)
-            }
-
-            if (type === "movie") {
-                  mediaItem.title = response.title;
-                  mediaItem.release_date = response.release_date;
-            }
-            else if (type === "tv") {
-                  mediaItem.title = response.name;
-                  mediaItem.release_date = response.first_air_date;
-            }
-
-            console.info(mediaItem);
-            // Hämta och rendera den valda filmen.
-            createOverviewItem(mediaItem);
-
-            // Hämta och rendera medverkande till filmen.
-            getMovieCrew(mediaItem.id);
-      });
-}
-
-function renderCredits(fullname, character, personID) {
-      var htmlString = "";
-
-      htmlString += '<div class="media-actor col-sm-4"><p><a href="" data-personID="' + personID + '">' + fullname + '</a></p><p class="media-people-title">' + character + '</p></div>';
-
-      $(".media-actors").append(htmlString);
-};
-
-function renderPersonProfile(personID, apiKey) {
-
-      $(".movie-result").html("");
-
-      var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": 'https://api.themoviedb.org/3/person/' + personID + '?language=en-US&api_key=' + apiKey,
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
-      }
-
-      $.ajax(settings).done(function (response) {
-
-            personObj = {
-                  id: infoCheck(response.id),
-                  name: infoCheck(response.name),
-                  biography: infoCheck(response.biography),
-                  birthday: infoCheck(response.birthday),
-                  gender: response.gender,
-                  homepage: infoCheck(response.homepage),
-                  place_of_birth: infoCheck(response.place_of_birth),
-                  image: getImageURL(response.profile_path, "w300"),
-
-            }
-
-            if (response.gender == 2) { personObj.gender = "Male"; }
-            else if (response.gender == 0) { personObj.gender = "Female"; }
-            else { personObj.gender = "Not found" }
-
-            createPersonProfile(personObj, apiKey);
-      });
-}
-
 function createPersonProfile(personObj, apiKey) {
 
       var htmlString = "";
@@ -400,64 +400,24 @@ function createPersonProfile(personObj, apiKey) {
 
 }
 
-function renderPersonProfileMoviesAndTVShows(personID, apiKey) {
+function createImageUrl(imagePath, imageSize) {
+      /*
+      IMAGE SIZE ALTERNATIVES
+            "w300",
+            "w780",
+            "w1280",
+            "original"
+      
+      */
+      var imageURL = "";
 
-      var htmlString = "";
+      imageURL = 'https://image.tmdb.org/t/p/' + imageSize + '/' + imagePath;
 
-      var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": 'https://api.themoviedb.org/3/person/' + personID + '/combined_credits?language=en-US&api_key=' + apiKey,
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
+      if (imagePath == null) {
+            imageURL = "http://www.51allout.co.uk/wp-content/uploads/2012/02/Image-not-found.gif";
       }
 
-      $.ajax(settings).done(function (response) {
-
-            var title = ""
-
-            for (var i = 0; i < response.cast.length; i++) {
-
-                  if (response.cast[i].media_type === "tv") {
-                        title = response.cast[i].name
-                  }
-                  else if (response.cast[i].media_type === "movie") {
-                        title = response.cast[i].title
-                  }
-
-                  htmlString += '<div class="known-for-item col-xs-12 col-sm-4 col-md-3"><div class="image"><img src="' + getImageURL(response.cast[i].poster_path, "w300") + '" alt=""></div><a href="" data-movieID="' + response.cast[i].id + '" data-mediaType="' + response.cast[i].media_type + '">' + title + '</a></div>';
-            }
-            $("#known-for-container").append(htmlString);
-      });
-}
-
-function getPopularMovies(apiKey) {
-      var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.themoviedb.org/3/movie/popular?page=1&language=en-US&api_key=" + apiKey,
-            "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-            "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
-      }
-
-      $.ajax(settings).done(function (response) {
-            var htmlString = "";
-            var moviePosters = response.results.map(e => e.poster_path);
-
-            // Set first slider startpage slider item
-            $(".carousel-item img").first().attr("src", getImageURL(moviePosters[0], "w780"));
-
-            for (var i = 1; i < moviePosters.length; i++) {
-                  htmlString = '<div class="carousel-item"><img class="d-block img-fluid" src="' + getImageURL(moviePosters[i], "w780") + '" alt="First slide"></div>'
-                  $(".carousel-inner").append(htmlString);
-            }
-      });
+      return imageURL;
 }
 
 function infoCheck(input) {

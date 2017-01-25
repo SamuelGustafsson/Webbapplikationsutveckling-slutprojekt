@@ -2,15 +2,15 @@
 
 ####_Skola:_ Lernia
 
+####_Utvecklare:_ Samuel Gustafsson
+
 ####_Utbildning:_ Javascriptutveckare, Frontend – Distans
 
-####_Slutprojekt Lernia16 Webbapplikationsutveckling:_ I kursen HTML, CSS, Javascript och webbstandarder har jag fått i uppgift att utforma en webbapplikation i språken HTML, CSS, Javascript, bibliotek jQuery och ramverket Bootstrap.
+####_Slutprojekt Lernia16 Webbapplikationsutveckling:_ I kursen HTML, CSS, Javascript och webbstandarder har jag fått i uppgift att utforma en webbapplikation i språken HTML, CSS, Javascript, bibliotek jQuery och ramverket Bootstrap. Den ska göra 4 stycken ajax anrop mot valfritt API.
 
-####_Arbetsprocess:_ Jag började med att leta efter apieer för att få en ide om vad jag skulle göra. Efter att leka med lite olika så hittade jag "The Movie DB". Efter många olika ideer valde jag att bygga en tjänst som man kan söka efter en serie eller film och få information om den. 
+####_Arbetsprocess:_ Jag började med att leta efter apieer för att få en ide om vad jag skulle göra. Efter testande av de olika APIerna så hittade jag "The Movie DB". Efter många olika ideer valde jag att bygga en tjänst som man kan söka efter en serie eller film och få information om den. 
 
-
-#####_Projekt beskrivning:_
-Med Webbapplikationen kan användare snabbt hitta information om en film eller serie.
+####_Projekt beskrivning:_ Med Webbapplikationen kan användare snabbt hitta information om en film eller serie.
 
 [Klicka på mig för att titta på Webbapplikationen](https://samuelgustafsson.github.io/Webbapplikationsutveckling-slutprojekt/)
 
@@ -35,7 +35,7 @@ Med Webbapplikationen kan användare snabbt hitta information om en film eller s
 
 ####_jQuery plugin:_
 
-####_Använda API:er_
+####_API:_ The Movie DB, dem har en databas som innehåller information om filmer, serier, skådespelare och medverkande personal. 
 * [The Movie DB](https://www.themoviedb.org/)
 
 

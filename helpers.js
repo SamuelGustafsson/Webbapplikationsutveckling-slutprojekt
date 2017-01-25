@@ -349,7 +349,7 @@ function createMediaItem(mediaObj) {
             '</div>' +
             '<div class="col-xs-12  info">' +
             '<p class="info-head">' +
-            '<a href="#" class="title">' + mediaObj.title + '</a>' +
+            '<a href="#" class=" info-title title" data-Id="' + mediaObj.id + '" data-type="' + mediaObj.type + '">' + mediaObj.title + '</a>' +
             '<span class="rating">' + mediaObj.rating + '<i class="fa fa-star fa-md" aria-hidden="true"></i></span></p>' +
             '<p class="meta">' +
             '<span class="genres">' + mediaObj.genres + '</span>' +

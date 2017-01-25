@@ -2,10 +2,7 @@
 
 $(document).ready(function () {
 
-
       var apiKey = "d3694056d3f695b5cee87388c26b9e69";
-
-
 
       $("#searchMovieBtn").click(function (event) {
 
@@ -14,7 +11,6 @@ $(document).ready(function () {
 
             // Sparar användarens sökinformation.
             var movieTitle = $("#movieInput").val();
-            console.log(movieTitle);
             if (movieTitle === "") {
                   $.alert(
                         {
@@ -30,6 +26,14 @@ $(document).ready(function () {
             }
 
             event.preventDefault();
+      });
+
+      $(".movie-result").on('click', '.info-title', function () {
+
+            var mediaID = $(this).attr("data-id");
+            var mediaType = $(this).attr("data-type");
+
+            renderOverviewItem(mediaID, mediaType, apiKey);
       });
 
       $(".movie-result").on('click', '.info-button', function () {

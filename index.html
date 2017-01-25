@@ -14,6 +14,9 @@
       <!-- Fontawesome -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+      <!-- jQuery confirm -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.0.3/jquery-confirm.min.css">
+
       <!-- Custome Styles -->
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="css/media-querys.css">
@@ -26,53 +29,55 @@
                   <img src="images/logo.png" alt="">
             </div>
       </header>
-      <section id="nav-options" class="col-xs-12 no-gutters">
-            <form class="form-inline col-12">
-                  <div class="form-group col-7">
-                        <input type="text" class="form-control" id="movieInput" placeholder="Movie title">
-                  </div>
-                  <div class="form-group col-3">
-                        <select id="searchDropbox" class="form-control">
+      <div class="container">
+            <section id="nav-options" class="col-xs-12 no-gutters">
+                  <form class="form-inline col-12">
+                        <div class="form-group col-7">
+                              <input type="text" class="form-control" id="movieInput" placeholder="Movie title">
+                        </div>
+                        <div class="form-group col-3">
+                              <select id="searchDropbox" class="form-control">
                               <option value="movie">Movie</option>
                               <option value="tv">Serie</option>
                         </select>
+                        </div>
+                        <div class="form-group col-2">
+                              <button id="searchMovieBtn" class="btn btn-primary">GO</button>
+                        </div>
+                  </form>
+            </section>
+            <!--<div id="carouselExampleIndicators col-sm-8 offset-sm-2" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  </ol>
+                  <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                              <img class="d-block img-fluid" src="" alt="First slide">
+                        </div>
                   </div>
-                  <div class="form-group col-2">
-                        <button id="searchMovieBtn" class="btn btn-primary">GO</button>
-                  </div>
-            </form>
-      </section>
-      <div id="carouselExampleIndicators col-sm-8 offset-sm-2" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="" alt="First slide">
-                  </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-            </a>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                  </a>
+            </div>-->
       </div>
 
       <section id="movie-section" class="container">
 
+            <div class="movie-result col-sm-12">
 
-            <div class="movie-result card-group col-sm-12"></div>
+            </div>
       </section>
-
       <footer>
-                  <div class="col-xs-12">
-                        Made by: Samuel Gustafsson
-                  </div>
+            <div class="col-xs-12">
+                  <p>Made by: Samuel Gustafsson</p>
+            </div>
       </footer>
 
       <!--Bootstrap 4 REQUERIES-->
@@ -83,6 +88,8 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
 
+      <!-- jQuery confirm -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.0.3/jquery-confirm.min.js"></script>
       <script src="helpers.js"></script>
       <script src="js/script.js"></script>
 

@@ -5,7 +5,7 @@ $(document).ready(function () {
 
       var apiKey = "d3694056d3f695b5cee87388c26b9e69";
 
-      getPopularMovies(apiKey)
+
 
       $("#searchMovieBtn").click(function (event) {
 
@@ -14,10 +14,20 @@ $(document).ready(function () {
 
             // Sparar användarens sökinformation.
             var movieTitle = $("#movieInput").val();
-            var movieOrSerie = $("#searchDropbox").val()
+            console.log(movieTitle);
+            if (movieTitle === "") {
+                  $.alert(
+                        {
+                              title: 'Alert!',
+                              content: 'Invalid input'
+                        });
+            }
+            else {
+                  var movieOrSerie = $("#searchDropbox").val()
 
-            //Gör sökning och visar data.
-            searchMovieOrSerieByQuery(movieOrSerie, movieTitle, apiKey);
+                  //Gör sökning och visar data.
+                  searchMovieOrSerieByQuery(movieOrSerie, movieTitle, apiKey);
+            }
 
             event.preventDefault();
       });

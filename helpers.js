@@ -5,42 +5,42 @@ var ajaxLoaderObj = {
 
 function searchMovieOrSerieByQuery(type, title, apiKey) {
 
-      var settings = {};
+            var settings = {};
 
-      settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.themoviedb.org/3/search/" + type + "?include_adult=false&page=1&query=" + title + "&language=en-US&api_key=" + apiKey,
-            "beforeSend": function () {
-                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
-                  $("#movie-section").addClass("ajax-load-fix");
-            },
-            "success": function () {
-                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
-                  $("#movie-section").removeClass("ajax-load-fix");
-            },
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
-      }
-
-      $.ajax(settings).done(function (response) {
-
-            if (response.results == 0) {
-                  $.alert(
-                        {
-                              title: 'Alert!',
-                              content: 'Sorry we couldent find that ' + type,
-                        });
+            settings = {
+                  "async": true,
+                  "crossDomain": true,
+                  "url": "https://api.themoviedb.org/3/search/" + type + "?include_adult=false&page=1&query=" + title + "&language=en-US&api_key=" + apiKey,
+                  "beforeSend": function () {
+                        ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                        $("#movie-section").addClass("ajax-load-fix");
+                  },
+                  "success": function () {
+                        ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                        $("#movie-section").removeClass("ajax-load-fix");
+                  },
+                  "method": "GET",
+                  "headers": {},
+                  "data": "{}"
             }
 
-            for (var i = 0; i < response.results.length; i++) {
+            $.ajax(settings).done(function (response) {
 
-                  getMediaByID(response.results[i].id, type, apiKey);
+                  if (response.results == 0) {
+                        $.alert(
+                              {
+                                    title: 'Alert!',
+                                    content: 'Sorry we couldent find that ' + type,
+                              });
+                  }
 
-            }
-            $(".jconfirm-box-container").addClass("offset-md-4");
-      });
+                  for (var i = 0; i < response.results.length; i++) {
+
+                        getMediaByID(response.results[i].id, type, apiKey);
+
+                  }
+                  $(".jconfirm-box-container").addClass("offset-md-4");
+            });
 }
 
 function getMediaByID(itemID, type, apiKey) {

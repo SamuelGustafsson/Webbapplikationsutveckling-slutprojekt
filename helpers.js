@@ -26,7 +26,6 @@ function searchMovieOrSerieByQuery(type, title, apiKey) {
 
       $.ajax(settings).done(function (response) {
 
-            console.info(response.results[0]);
             if (response.results == 0) {
                   $.alert(
                         {
@@ -40,7 +39,6 @@ function searchMovieOrSerieByQuery(type, title, apiKey) {
                   getMediaByID(response.results[i].id, type, apiKey);
 
             }
-            alert("tjenna");
             $(".jconfirm-box-container").addClass("offset-md-4");
       });
 }
@@ -143,35 +141,6 @@ function getGenresFromMediaID(array) {
 
 }
 
-// function getMoviesOnCinema() {
-//       settings = {
-//             "async": true,
-//             "crossDomain": true,
-//             "url": " https://api.themoviedb.org/3/movie/now_playing?api_key=d3694056d3f695b5cee87388c26b9e69&language=en-US&page=1&region=SE",
-//             "beforeSend": function () { ajaxLoaderObj.container.append(ajaxLoaderObj.loader);},
-//             "success": function () { ajaxLoaderObj.container.find($(".ajax-loader")).remove();},
-//             "method": "GET",
-//             "headers": {},
-//             "data": "{}"
-//       }
-//       $.ajax(settings).done(function (response) {
-//             getPosters(response)
-//       });
-
-// }
-
-// function getPosters(movieObject) {
-//       var posterArr = [];
-
-//       for (var i = 0; i < movieObject.results.length; i++) {
-
-//             if (movieObject.results[i].poster_path) {
-//                   posterArr.push(createImageUrl(movieObject.results[i].poster_path, "original"));
-//             }
-//       }
-//       return posterArr;
-// }
-
 function getMovieCrew(movieID) {
 
       var settings = {
@@ -221,8 +190,6 @@ function renderOverviewItem(mediaID, type, apiKey) {
 
       $.ajax(settings).done(function (response) {
 
-            console.info(response);
-
             var mediaItem = {};
 
             var mediaItem = {
@@ -241,7 +208,6 @@ function renderOverviewItem(mediaID, type, apiKey) {
                   mediaItem.release_date = response.first_air_date;
             }
 
-            console.info(mediaItem);
             // Hämta och rendera den valda filmen.
             createOverviewItem(mediaItem);
 

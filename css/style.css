@@ -9,18 +9,18 @@ header {
 
 footer {
   background-color: #081C24;
-  height: 200px;
+  height: 100px;
 }
 
 footer div {
   color: white;
-  font-size: 30px;
+  font-size: 1rem;
   height: 100%;
 }
   
   footer div p {
     text-align: center;
-    padding: 66px;
+    padding: 32px;
 }
 
 header div {
@@ -48,6 +48,18 @@ h1 {
 ul {
   list-style: none;
 }
+
+/* Navigation */
+
+.navbar-nav {
+  margin: 0 auto;
+}
+
+.bg-faded {
+  background-color: white;
+}
+
+/***************************************************************/
 
 #movie-section {
    margin-bottom: 20px;
@@ -270,11 +282,21 @@ height: 100%
   height: 100%
 }
 
+/* about-section */
+#about-section {
+  margin: 40px 0;
+}
+
+#about-section h1 {
+  font-size: 1.8rem;
+}
+
+#about-section p {
+  margin-bottom: 15px;
+}
+
+
 /**********************************************/
-
-/* jQuery confirm */
-
-
 
 /* Ajax loader icon */
 
@@ -289,9 +311,6 @@ height: 100%
                     no-repeat 50%;
 }
 
-.ajax-load-fix {
-  height: 600px;
-}
 .ajax-load-fix {
   height: 600px;
 }

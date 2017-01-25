@@ -66,6 +66,9 @@ No media query since this is the default in Bootstrap
    margin-top: 30px;
 }
 
+footer div {
+  font-size: 0.8rem;
+}
 
 }
 /* Small devices (landscape phones, 576px and up) */

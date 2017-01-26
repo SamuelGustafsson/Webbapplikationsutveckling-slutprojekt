@@ -146,7 +146,7 @@ function getMovieCrew(movieID, type) {
       var settings = {
             "async": true,
             "crossDomain": true,
-            "url": 'https://api.themoviedb.org/3/' + type +'/' + movieID + '/credits?api_key=d3694056d3f695b5cee87388c26b9e69',
+            "url": 'https://api.themoviedb.org/3/' + type + '/' + movieID + '/credits?api_key=d3694056d3f695b5cee87388c26b9e69',
             "beforeSend": function () {
                   ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
                   $("#movie-section").addClass("ajax-load-fix");
@@ -383,10 +383,6 @@ function createOverviewItem(mediaObj) {
             '<div class="media-actors row"></div></div></div>';
 
       $(".movie-result").append(htmlString);
-
-      console.log(mediaObj.rating);
-
-
 }
 
 function createPersonProfile(personObj, apiKey) {

@@ -5,10 +5,6 @@ No media query since this is the default in Bootstrap
 
 @media (max-width: 575px) {
 
-   .carousel-inner {
-      height: auto;
-   }
-
    #media-overview-item h2,
    #media-overview-item h3 {
       text-align: center;

@@ -5,42 +5,42 @@ var ajaxLoaderObj = {
 
 function searchMovieOrSerieByQuery(type, title, apiKey) {
 
-            var settings = {};
+      var settings = {};
 
-            settings = {
-                  "async": true,
-                  "crossDomain": true,
-                  "url": "https://api.themoviedb.org/3/search/" + type + "?include_adult=false&page=1&query=" + title + "&language=en-US&api_key=" + apiKey,
-                  "beforeSend": function () {
-                        ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
-                        $("#movie-section").addClass("ajax-load-fix");
-                  },
-                  "success": function () {
-                        ajaxLoaderObj.container.find($(".ajax-loader").remove());
-                        $("#movie-section").removeClass("ajax-load-fix");
-                  },
-                  "method": "GET",
-                  "headers": {},
-                  "data": "{}"
+      settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.themoviedb.org/3/search/" + type + "?include_adult=false&page=1&query=" + title + "&language=en-US&api_key=" + apiKey,
+            "beforeSend": function () {
+                  ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
+                  $("#movie-section").addClass("ajax-load-fix");
+            },
+            "success": function () {
+                  ajaxLoaderObj.container.find($(".ajax-loader").remove());
+                  $("#movie-section").removeClass("ajax-load-fix");
+            },
+            "method": "GET",
+            "headers": {},
+            "data": "{}"
+      }
+
+      $.ajax(settings).done(function (response) {
+
+            if (response.results == 0) {
+                  $.alert(
+                        {
+                              title: 'Alert!',
+                              content: 'Sorry we couldent find that ' + type,
+                        });
             }
 
-            $.ajax(settings).done(function (response) {
+            for (var i = 0; i < response.results.length; i++) {
 
-                  if (response.results == 0) {
-                        $.alert(
-                              {
-                                    title: 'Alert!',
-                                    content: 'Sorry we couldent find that ' + type,
-                              });
-                  }
+                  getMediaByID(response.results[i].id, type, apiKey);
 
-                  for (var i = 0; i < response.results.length; i++) {
-
-                        getMediaByID(response.results[i].id, type, apiKey);
-
-                  }
-                  $(".jconfirm-box-container").addClass("offset-md-4");
-            });
+            }
+            $(".jconfirm-box-container").addClass("offset-md-4");
+      });
 }
 
 function getMediaByID(itemID, type, apiKey) {
@@ -141,12 +141,12 @@ function getGenresFromMediaID(array) {
 
 }
 
-function getMovieCrew(movieID) {
+function getMovieCrew(movieID, type) {
 
       var settings = {
             "async": true,
             "crossDomain": true,
-            "url": 'https://api.themoviedb.org/3/movie/' + movieID + '/credits?api_key=d3694056d3f695b5cee87388c26b9e69',
+            "url": 'https://api.themoviedb.org/3/' + type +'/' + movieID + '/credits?api_key=d3694056d3f695b5cee87388c26b9e69',
             "beforeSend": function () {
                   ajaxLoaderObj.container.append(ajaxLoaderObj.loader);
                   $("#movie-section").addClass("ajax-load-fix");
@@ -204,15 +204,14 @@ function renderOverviewItem(mediaID, type, apiKey) {
                   mediaItem.release_date = response.release_date;
             }
             else if (type === "tv") {
-                  mediaItem.title = response.name;
-                  mediaItem.release_date = response.first_air_date;
+                  mediaItem.title = infoCheck(response.name);
+                  mediaItem.release_date = infoCheck(response.first_air_date);
             }
 
             // Hämta och rendera den valda filmen.
             createOverviewItem(mediaItem);
-
             // Hämta och rendera medverkande till filmen.
-            getMovieCrew(mediaItem.id);
+            getMovieCrew(mediaItem.id, type);
       });
 }
 
@@ -374,7 +373,7 @@ function createOverviewItem(mediaObj) {
             '</div>' +
             '<div class="media-information-container col-xs-12 col-lg-7">' +
             '<div class="media-title row">' +
-            '<h2><a href="">' + mediaObj.title + '</a><span>(' + mediaObj.release_date + ')</span></h2>' +
+            '<h2>' + mediaObj.title + '<span>(' + mediaObj.release_date + ')</span></h2>' +
             '<div class="media-rating"><i class="fa fa-star fa-md" aria-hidden="true"></i><span>' + mediaObj.rating + '</span></div>' +
             '<div class="overview">' +
             '<h3>Overview</h3>' +
@@ -384,6 +383,8 @@ function createOverviewItem(mediaObj) {
             '<div class="media-actors row"></div></div></div>';
 
       $(".movie-result").append(htmlString);
+
+      console.log(mediaObj.rating);
 
 
 }
